@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">App Tu.u</string>
+    <string name="menu_home">Beranda</string>
+    <string name="menu_videos">Video</string>
+    <string name="menu_articles">Artikel</string>
+    <string name="menu_about">Tentang</string>
+    <string name="close_drawer">Drawer Close</string>
+    <string name="open_drawer">Drawer Open</string>
+</resources>
