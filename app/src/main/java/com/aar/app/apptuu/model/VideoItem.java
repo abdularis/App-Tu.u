@@ -90,4 +90,18 @@ public class VideoItem {
     public void setStarredDate(Date starredDate) {
         mStarredDate = starredDate;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (!(obj instanceof VideoItem)) return false;
+
+        VideoItem o = (VideoItem) obj;
+        return mId == o.mId &&
+                mCategoryId == o.mCategoryId &&
+                mUri.equals(o.mUri) &&
+                mWord.equals(o.mWord) &&
+                mStarred == o.mStarred &&
+                mStarredDate == o.mStarredDate;
+    }
 }

@@ -49,4 +49,13 @@ public class CategoryInfo {
     public void setItemCount(int itemCount) {
         mItemCount = itemCount;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (!(obj instanceof CategoryInfo)) return false;
+
+        CategoryInfo o = (CategoryInfo) obj;
+        return mId == o.mId && mName.equals(o.mName);
+    }
 }
