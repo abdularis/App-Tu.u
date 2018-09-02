@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.aar.app.apptuu.categorylist.CategoryListFragment;
+import com.aar.app.apptuu.searchbyvoice.VoiceSearchFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         initNavDrawer();
+        showHome();
     }
 
     @Override
@@ -71,7 +73,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showHome() {
-
+        mToolbar.setTitle(R.string.app_name);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, VoiceSearchFragment.newInstance())
+                .commit();
     }
 
     private void showVideos() {
