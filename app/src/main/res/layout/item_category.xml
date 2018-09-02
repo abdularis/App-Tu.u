@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="@drawable/bg_item_basic"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp">
+    android:background="@drawable/bg_item_basic">
 
     <ImageView
         android:id="@+id/imageView"
@@ -47,4 +45,13 @@
         app:layout_constraintEnd_toEndOf="@+id/textCategory"
         app:layout_constraintStart_toStartOf="@+id/textCategory"
         app:layout_constraintTop_toBottomOf="@+id/textCategory"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:background="#e4e4e4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"/>
 </android.support.constraint.ConstraintLayout>
