@@ -36,6 +36,8 @@ public class VideoListActivity extends AppCompatActivity {
     TextView mTvCategory;
     @BindView(R.id.textDesc)
     TextView mTvDesc;
+    @BindView(R.id.ivRepeat)
+    ImageView mIvRepeat;
 
     private VideoListViewModel mViewModel;
     private MultiTypeAdapter mAdapter;
@@ -49,6 +51,7 @@ public class VideoListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mPlayerPreference = PlayerPreference.getInstance(getApplication());
+        updatePlayerPrefs();
 
         mVideoView.setOnCompletionListener(mp -> {
             if (mPlayerPreference.repeatVideo()) {
@@ -99,14 +102,13 @@ public class VideoListActivity extends AppCompatActivity {
 
     @OnClick(R.id.ivRepeat)
     public void onRepeatClick(View v) {
-        ImageView iv = (ImageView) v;
         if (mPlayerPreference.repeatVideo()) {
             mPlayerPreference.setRepeatVideo(false);
-            iv.clearColorFilter();
         } else {
             mPlayerPreference.setRepeatVideo(true);
-            iv.setColorFilter(getResources().getColor(R.color.colorAccent));
         }
+
+        updatePlayerPrefs();
     }
 
     private void onCategoryInfoLoaded(CategoryInfo categoryInfo) {
@@ -116,5 +118,13 @@ public class VideoListActivity extends AppCompatActivity {
 
     private void onVideoItemLoaded(List<VideoItem> videoItems) {
         mAdapter.setItems(videoItems);
+    }
+
+    private void updatePlayerPrefs() {
+        if (mPlayerPreference.repeatVideo()) {
+            mIvRepeat.setColorFilter(getResources().getColor(R.color.colorAccent));
+        } else {
+            mIvRepeat.clearColorFilter();
+        }
     }
 }
