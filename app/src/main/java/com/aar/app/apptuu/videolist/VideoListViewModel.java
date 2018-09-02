@@ -27,6 +27,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class VideoListViewModel extends AndroidViewModel {
 
+    private VideoItem mCurrentVideoItem;
     private int mCurrentCategoryId;
     private CategoryInfoDao mCategoryInfoDao;
     private VideoItemDao mVideoItemDao;
@@ -76,6 +77,14 @@ public class VideoListViewModel extends AndroidViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mOnVideoItemLoaded::setValue);
+    }
+
+    public VideoItem getCurrentVideoItem() {
+        return mCurrentVideoItem;
+    }
+
+    public void setCurrentVideoItem(VideoItem currentVideoItem) {
+        mCurrentVideoItem = currentVideoItem;
     }
 
     public LiveData<List<VideoItem>> getOnVideoItemLoaded() {

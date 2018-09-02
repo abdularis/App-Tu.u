@@ -1,23 +1,19 @@
 package com.aar.app.apptuu.videolist;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.aar.app.apptuu.PlayerPreference;
 import com.aar.app.apptuu.R;
 import com.aar.app.apptuu.easyadapter.MultiTypeAdapter;
-import com.aar.app.apptuu.easyadapter.SimpleAdapterDelegate;
 import com.aar.app.apptuu.model.CategoryInfo;
 import com.aar.app.apptuu.model.VideoItem;
 
@@ -25,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class VideoListActivity extends AppCompatActivity {
 
@@ -42,6 +39,7 @@ public class VideoListActivity extends AppCompatActivity {
 
     private VideoListViewModel mViewModel;
     private MultiTypeAdapter mAdapter;
+    private PlayerPreference mPlayerPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +47,18 @@ public class VideoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video_list);
 
         ButterKnife.bind(this);
+
+        mPlayerPreference = PlayerPreference.getInstance(getApplication());
+
+        mVideoView.setOnCompletionListener(mp -> {
+            if (mPlayerPreference.repeatVideo()) {
+                VideoItem vi = mViewModel.getCurrentVideoItem();
+                if (vi != null) {
+                    mVideoView.setVideoURI(Uri.parse(vi.getUri()));
+                    mVideoView.start();
+                }
+            }
+        });
 
         mAdapter = new MultiTypeAdapter();
         mAdapter.addDelegate(
@@ -66,6 +76,7 @@ public class VideoListActivity extends AppCompatActivity {
                     star.setOnClickListener(v -> mViewModel.toggleStar(model));
                 },
                 (model, view) -> {
+                    mViewModel.setCurrentVideoItem(model);
                     mVideoView.setVideoURI(Uri.parse(model.getUri()));
                     mVideoView.start();
                 }
@@ -83,6 +94,18 @@ public class VideoListActivity extends AppCompatActivity {
             if (extras.containsKey(EXTRA_CATEGORY_ID)) {
                 mViewModel.loadVideoItems(extras.getInt(EXTRA_CATEGORY_ID));
             }
+        }
+    }
+
+    @OnClick(R.id.ivRepeat)
+    public void onRepeatClick(View v) {
+        ImageView iv = (ImageView) v;
+        if (mPlayerPreference.repeatVideo()) {
+            mPlayerPreference.setRepeatVideo(false);
+            iv.clearColorFilter();
+        } else {
+            mPlayerPreference.setRepeatVideo(true);
+            iv.setColorFilter(getResources().getColor(R.color.colorAccent));
         }
     }
 
