@@ -8,11 +8,13 @@ import com.aar.app.apptuu.model.VideoItem;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+
 @Dao
 public interface VideoItemDao {
 
     @Query("SELECT * FROM video_items")
-    List<VideoItem> getVideoItemList();
+    Flowable<List<VideoItem>> getVideoItemList();
 
     @Query("UPDATE video_items SET starred=1 WHERE id=:videoItemId")
     void starVideoItem(int videoItemId);
