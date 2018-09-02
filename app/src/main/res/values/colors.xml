@@ -5,4 +5,5 @@
     <color name="colorAccent">#FD1743</color>
     <color name="headerBackground">#f6faff</color>
     <color name="headerSeparator">#1e1565c0</color>
+    <color name="star">#FBC02D</color>
 </resources>

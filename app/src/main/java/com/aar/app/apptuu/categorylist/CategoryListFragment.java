@@ -1,6 +1,7 @@
 package com.aar.app.apptuu.categorylist;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.aar.app.apptuu.R;
 import com.aar.app.apptuu.easyadapter.MultiTypeAdapter;
 import com.aar.app.apptuu.model.CategoryInfo;
+import com.aar.app.apptuu.videolist.VideoListActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,7 +60,12 @@ public class CategoryListFragment extends Fragment {
                     holder.<TextView>find(R.id.textCategory).setText(model.getName());
                     holder.<TextView>find(R.id.textDesc).setText(model.getItemCount() + " video");
                 },
-                (model, view) -> {}
+                (model, view) -> {
+                    Intent i = new Intent(getActivity(), VideoListActivity.class);
+                    i.putExtra(VideoListActivity.EXTRA_CATEGORY_ID, model.getId());
+                    i.putExtra(VideoListActivity.EXTRA_CATEGORY_NAME, model.getName());
+                    startActivity(i);
+                }
         );
         mAdapter.addDelegate(
                 HeaderItem.class,
@@ -71,6 +78,7 @@ public class CategoryListFragment extends Fragment {
         mViewModel.getOnCategoryInfoLoaded().observe(this, categoryInfoList -> {
             mAdapter.setItems(categoryInfoList);
             mAdapter.insertAt(0, new HeaderItem("Kategori Video"));
+            mAdapter.notifyItemInserted(0);
         });
     }
 
