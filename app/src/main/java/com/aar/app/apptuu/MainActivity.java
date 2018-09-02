@@ -1,5 +1,6 @@
 package com.aar.app.apptuu;
 
+import android.app.FragmentTransaction;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -7,7 +8,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import com.aar.app.apptuu.categorylist.CategoryListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,8 +43,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initNavDrawer() {
+        mNavView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
                 R.string.open_drawer, R.string.close_drawer);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+    }
+
+    private boolean onNavigationItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.item_home:
+                showHome();
+                break;
+            case R.id.item_videos:
+                showVideos();
+                break;
+            case R.id.item_articles:
+                showArticles();
+                break;
+            case R.id.item_about:
+                showAbout();
+                break;
+        }
+
+        menuItem.setChecked(true);
+        mDrawerLayout.closeDrawers();
+        return true;
+    }
+
+    private void showHome() {
+
+    }
+
+    private void showVideos() {
+        mToolbar.setTitle("Video Latihan");
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, CategoryListFragment.newInstance())
+                .commit();
+    }
+
+    private void showArticles() {
+
+    }
+
+    private void showAbout() {
+
     }
 }

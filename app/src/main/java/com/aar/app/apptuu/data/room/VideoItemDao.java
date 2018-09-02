@@ -14,10 +14,10 @@ public interface VideoItemDao {
     @Query("SELECT * FROM video_items")
     List<VideoItem> getVideoItemList();
 
-    @Query("UPDATE video_items SET starred=1")
+    @Query("UPDATE video_items SET starred=1 WHERE id=:videoItemId")
     void starVideoItem(int videoItemId);
 
-    @Query("UPDATE video_items SET starred=0")
+    @Query("UPDATE video_items SET starred=0 WHERE id=:videoItemId")
     void unstarVideoItem(int videoItemId);
 
     @Query("SELECT COUNT(*) FROM video_items WHERE category_id=:categoryId")
@@ -26,4 +26,6 @@ public interface VideoItemDao {
     @Insert
     void insert(VideoItem videoItem);
 
+    @Insert
+    void insertAll(VideoItem... videoItems);
 }

@@ -31,6 +31,10 @@ public class VideoItem {
         this(-1, -1, "", "", false);
     }
 
+    public VideoItem(int categoryId, String uri, String word) {
+        this(0, categoryId, uri, word, false);
+    }
+
     public VideoItem(int id, int categoryId, String uri, String word, boolean starred) {
         mId = id;
         mCategoryId = categoryId;

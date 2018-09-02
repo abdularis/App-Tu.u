@@ -8,14 +8,17 @@ import com.aar.app.apptuu.model.CategoryInfo;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 
 @Dao
 public interface CategoryInfoDao {
 
     @Query("SELECT * FROM categories")
-    List<CategoryInfo> getCategoryInfoList();
+    Flowable<List<CategoryInfo>> getCategoryInfoList();
 
     @Insert
     void insert(CategoryInfo categoryInfo);
 
+    @Insert
+    void insertAll(CategoryInfo... categoryInfos);
 }

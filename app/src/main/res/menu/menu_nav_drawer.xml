@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/app_screens">
+        <item
+            android:id="@+id/item_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/menu_home"/>
 
-    <item
-        android:id="@+id/item_home"
-        android:icon="@drawable/ic_home"
-        android:title="@string/menu_home"/>
+        <item
+            android:id="@+id/item_videos"
+            android:icon="@drawable/ic_videos"
+            android:title="@string/menu_videos"/>
 
-    <item
-        android:id="@+id/item_videos"
-        android:icon="@drawable/ic_videos"
-        android:title="@string/menu_videos"/>
+        <item
+            android:id="@+id/item_articles"
+            android:icon="@drawable/ic_articles"
+            android:title="@string/menu_articles"/>
 
-    <item
-        android:id="@+id/item_articles"
-        android:icon="@drawable/ic_articles"
-        android:title="@string/menu_articles"/>
-
-    <item
-        android:id="@+id/item_about"
-        android:icon="@drawable/ic_about"
-        android:title="@string/menu_about"/>
+        <item
+            android:id="@+id/item_about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/menu_about"/>
+    </group>
 </menu>
