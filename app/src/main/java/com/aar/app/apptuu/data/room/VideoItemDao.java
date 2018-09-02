@@ -16,6 +16,9 @@ public interface VideoItemDao {
     @Query("SELECT * FROM video_items")
     Flowable<List<VideoItem>> getVideoItemList();
 
+    @Query("SELECT * FROM video_items WHERE category_id=:categoryId")
+    Flowable<List<VideoItem>> getVideoItemList(int categoryId);
+
     @Query("UPDATE video_items SET starred=1 WHERE id=:videoItemId")
     void starVideoItem(int videoItemId);
 

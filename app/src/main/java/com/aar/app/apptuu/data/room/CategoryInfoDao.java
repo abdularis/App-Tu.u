@@ -16,6 +16,9 @@ public interface CategoryInfoDao {
     @Query("SELECT * FROM categories")
     Flowable<List<CategoryInfo>> getCategoryInfoList();
 
+    @Query("SELECT * FROM categories WHERE id=:id")
+    Flowable<CategoryInfo> getCategoryInfo(int id);
+
     @Insert
     void insert(CategoryInfo categoryInfo);
 
