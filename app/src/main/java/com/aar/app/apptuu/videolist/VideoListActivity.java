@@ -36,6 +36,8 @@ public class VideoListActivity extends AppCompatActivity {
     TextView mTvCategory;
     @BindView(R.id.textDesc)
     TextView mTvDesc;
+    @BindView(R.id.textEmpty)
+    TextView mTvEmpty;
     @BindView(R.id.ivRepeat)
     ImageView mIvRepeat;
 
@@ -117,7 +119,14 @@ public class VideoListActivity extends AppCompatActivity {
     }
 
     private void onVideoItemLoaded(List<VideoItem> videoItems) {
-        mAdapter.setItems(videoItems);
+        if (videoItems.isEmpty()) {
+            mTvEmpty.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        } else {
+            mTvEmpty.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mAdapter.setItems(videoItems);
+        }
     }
 
     private void updatePlayerPrefs() {
