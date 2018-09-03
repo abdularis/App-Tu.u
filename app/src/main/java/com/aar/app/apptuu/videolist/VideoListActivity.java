@@ -1,6 +1,7 @@
 package com.aar.app.apptuu.videolist;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -111,6 +112,19 @@ public class VideoListActivity extends AppCompatActivity {
         }
 
         updatePlayerPrefs();
+    }
+
+    @OnClick(R.id.ivFullscreen)
+    public void onFullscreenClick(View v) {
+        VideoItem vi = mViewModel.getCurrentVideoItem();
+        if (vi == null) return;
+
+        mVideoView.pause();
+
+        Intent i = new Intent(this, VideoPlayerActivity.class);
+        i.putExtra(VideoPlayerActivity.EXTRA_VIDEO_URI, vi.getUri());
+        i.putExtra(VideoPlayerActivity.EXTRA_PLAY_PROGRESS, mVideoView.getCurrentPosition());
+        startActivity(i);
     }
 
     private void onCategoryInfoLoaded(CategoryInfo categoryInfo) {

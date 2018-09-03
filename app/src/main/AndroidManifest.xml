@@ -22,6 +22,11 @@
             android:name=".videolist.VideoListActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".videolist.VideoPlayerActivity"
+            android:theme="@style/FullscreenTheme"
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>
