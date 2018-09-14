@@ -1,4 +1,4 @@
-package com.aar.app.apptuu.videolist;
+package com.aar.app.apptuu.features.videolist;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -13,15 +13,11 @@ import com.aar.app.apptuu.data.room.VideoItemDao;
 import com.aar.app.apptuu.model.CategoryInfo;
 import com.aar.app.apptuu.model.VideoItem;
 
-import org.reactivestreams.Publisher;
-
 import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 

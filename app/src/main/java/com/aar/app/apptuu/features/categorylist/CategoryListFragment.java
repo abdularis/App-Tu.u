@@ -1,4 +1,4 @@
-package com.aar.app.apptuu.categorylist;
+package com.aar.app.apptuu.features.categorylist;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -19,8 +19,8 @@ import com.aar.app.apptuu.R;
 import com.aar.app.apptuu.easyadapter.MultiTypeAdapter;
 import com.aar.app.apptuu.model.CategoryInfo;
 import com.aar.app.apptuu.model.VideoItem;
-import com.aar.app.apptuu.videolist.VideoListActivity;
-import com.aar.app.apptuu.videolist.VideoPlayerActivity;
+import com.aar.app.apptuu.features.videolist.VideoListActivity;
+import com.aar.app.apptuu.features.videolist.VideoPlayerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.aar.app.apptuu.searchbyvoice;
+package com.aar.app.apptuu.features.searchbyvoice;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;

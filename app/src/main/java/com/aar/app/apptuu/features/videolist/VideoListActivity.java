@@ -1,4 +1,4 @@
-package com.aar.app.apptuu.videolist;
+package com.aar.app.apptuu.features.videolist;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;

@@ -1,6 +1,5 @@
 package com.aar.app.apptuu;
 
-import android.app.FragmentTransaction;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,8 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.aar.app.apptuu.categorylist.CategoryListFragment;
-import com.aar.app.apptuu.searchbyvoice.VoiceSearchFragment;
+import com.aar.app.apptuu.features.categorylist.CategoryListFragment;
+import com.aar.app.apptuu.features.searchbyvoice.VoiceSearchFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.aar.app.apptuu.categorylist;
+package com.aar.app.apptuu.features.categorylist;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -19,7 +19,6 @@ import java.util.List;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 

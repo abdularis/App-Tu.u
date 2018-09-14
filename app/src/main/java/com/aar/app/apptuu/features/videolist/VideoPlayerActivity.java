@@ -1,4 +1,4 @@
-package com.aar.app.apptuu.videolist;
+package com.aar.app.apptuu.features.videolist;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -8,7 +8,6 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 
 import com.aar.app.apptuu.PlayerPreference;
-import com.aar.app.apptuu.R;
 
 public class VideoPlayerActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
 
