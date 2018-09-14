@@ -19,11 +19,10 @@
             android:icon="@drawable/ic_articles"
             android:checkable="true"
             android:title="@string/menu_articles"/>
-
-        <item
-            android:id="@+id/item_about"
-            android:icon="@drawable/ic_about"
-            android:checkable="true"
-            android:title="@string/menu_about"/>
     </group>
+
+    <item
+        android:id="@+id/item_about"
+        android:icon="@drawable/ic_about"
+        android:title="@string/menu_about"/>
 </menu>

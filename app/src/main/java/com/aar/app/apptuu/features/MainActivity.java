@@ -1,5 +1,6 @@
 package com.aar.app.apptuu.features;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -55,19 +56,21 @@ public class MainActivity extends AppCompatActivity {
         switch (menuItem.getItemId()) {
             case R.id.item_home:
                 showHome();
+                menuItem.setChecked(true);
                 break;
             case R.id.item_videos:
                 showVideos();
+                menuItem.setChecked(true);
                 break;
             case R.id.item_articles:
                 showArticles();
+                menuItem.setChecked(true);
                 break;
             case R.id.item_about:
                 showAbout();
                 break;
         }
 
-        menuItem.setChecked(true);
         mDrawerLayout.closeDrawers();
         return true;
     }
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAbout() {
-
+        Intent i = new Intent(this, AboutActivity.class);
+        startActivity(i);
     }
 }
