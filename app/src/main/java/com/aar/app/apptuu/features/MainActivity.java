@@ -1,4 +1,4 @@
-package com.aar.app.apptuu;
+package com.aar.app.apptuu.features;
 
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.aar.app.apptuu.R;
 import com.aar.app.apptuu.features.categorylist.CategoryListFragment;
 import com.aar.app.apptuu.features.searchbyvoice.VoiceSearchFragment;
 
