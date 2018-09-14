@@ -13,17 +13,23 @@ public class CategoryInfo {
     private int mId;
     @ColumnInfo(name = "name")
     private String mName;
+    @ColumnInfo(name = "icon_resource")
+    private int mIconResource;
+    @ColumnInfo(name = "color")
+    private String mColor;
     @Ignore
     private int mItemCount;
 
     public CategoryInfo() {
-        this(-1, "", -1);
+        this(-1, "", -1, -1, "#000");
     }
 
-    public CategoryInfo(int id, String name, int itemCount) {
+    public CategoryInfo(int id, String name, int itemCount, int iconResource, String color) {
         mId = id;
         mName = name;
         mItemCount = itemCount;
+        mIconResource = iconResource;
+        mColor = color;
     }
 
     public int getId() {
@@ -40,6 +46,22 @@ public class CategoryInfo {
 
     public void setName(String name) {
         mName = name;
+    }
+
+    public int getIconResource() {
+        return mIconResource;
+    }
+
+    public void setIconResource(int iconResource) {
+        mIconResource = iconResource;
+    }
+
+    public String getColor() {
+        return mColor;
+    }
+
+    public void setColor(String color) {
+        mColor = color;
     }
 
     public int getItemCount() {

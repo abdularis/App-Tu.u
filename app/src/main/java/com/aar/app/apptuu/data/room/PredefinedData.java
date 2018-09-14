@@ -21,15 +21,15 @@ public final class PredefinedData {
 
     public static CategoryInfo[] getCategories() {
         return new CategoryInfo[]{
-                new CategoryInfo(ID_ABJ, "Abjad", 0),
-                new CategoryInfo(ID_ANGK, "Angka", 0),
-                new CategoryInfo(ID_BND, "Benda", 0),
-                new CategoryInfo(ID_BUAH, "Buah", 0),
-                new CategoryInfo(ID_HWN, "Hewan", 0),
-                new CategoryInfo(ID_MMK, "Mimik", 0),
-                new CategoryInfo(ID_ORG, "Orang", 0),
-                new CategoryInfo(ID_TRAN, "Transportasi", 0),
-                new CategoryInfo(ID_WRN, "Warna", 0)
+                new CategoryInfo(ID_ABJ, "Abjad", 0, R.drawable.ic_abjad, "#039BE5"),
+                new CategoryInfo(ID_ANGK, "Angka", 0, R.drawable.ic_angka, "#8E24AA"),
+                new CategoryInfo(ID_BND, "Benda", 0, R.drawable.ic_benda, "#FDD835"),
+                new CategoryInfo(ID_BUAH, "Buah", 0, R.drawable.ic_buah, "#D32F2F"),
+                new CategoryInfo(ID_HWN, "Hewan", 0, R.drawable.ic_hewan, "#3CB549"),
+                new CategoryInfo(ID_MMK, "Mimik", 0, R.drawable.ic_mimik, "#FD1743"),
+                new CategoryInfo(ID_ORG, "Orang", 0, R.drawable.ic_orang, "#1564BE"),
+                new CategoryInfo(ID_TRAN, "Transportasi", 0, R.drawable.ic_transportasi, "#FF9000"),
+                new CategoryInfo(ID_WRN, "Warna", 0, R.drawable.ic_warna, "#10C6F0")
         };
     }
 

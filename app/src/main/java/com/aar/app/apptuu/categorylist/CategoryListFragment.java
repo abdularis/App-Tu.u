@@ -2,6 +2,7 @@ package com.aar.app.apptuu.categorylist;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -77,6 +78,8 @@ public class CategoryListFragment extends Fragment {
                 CategoryInfo.class,
                 R.layout.item_category,
                 (model, holder) -> {
+                    holder.<ImageView>find(R.id.imageView).setImageResource(model.getIconResource());
+                    holder.find(R.id.frameLayout).setBackgroundColor(Color.parseColor(model.getColor()));
                     holder.<TextView>find(R.id.textCategory).setText(model.getName());
                     holder.<TextView>find(R.id.textDesc).setText(model.getItemCount() + " video");
                 },

@@ -2,6 +2,7 @@ package com.aar.app.apptuu.videolist;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class VideoListActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     @BindView(R.id.videoView)
     VideoView mVideoView;
+    @BindView(R.id.imageView)
+    ImageView mCategoryIcon;
     @BindView(R.id.textCategory)
     TextView mTvCategory;
     @BindView(R.id.textDesc)
@@ -128,6 +131,8 @@ public class VideoListActivity extends AppCompatActivity {
     }
 
     private void onCategoryInfoLoaded(CategoryInfo categoryInfo) {
+        findViewById(R.id.frameLayout).setBackgroundColor(Color.parseColor(categoryInfo.getColor()));
+        mCategoryIcon.setImageResource(categoryInfo.getIconResource());
         mTvCategory.setText(categoryInfo.getName());
         mTvDesc.setText(categoryInfo.getItemCount() + " video");
     }

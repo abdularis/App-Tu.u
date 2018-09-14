@@ -7,16 +7,22 @@
     android:layout_height="60dp"
     android:background="@android:color/white">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="#b4b4b4"
-        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_category"/>
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:tint="@android:color/white"
+            app:srcCompat="@drawable/ic_category"/>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textCategory"
@@ -30,7 +36,7 @@
         android:text="TextView"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/ivFullscreen"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/frameLayout"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
