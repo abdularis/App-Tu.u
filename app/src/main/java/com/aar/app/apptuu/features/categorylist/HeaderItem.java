@@ -8,6 +8,6 @@ public class HeaderItem {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof String && (this == obj || this.title.equals((String) obj));
+        return obj instanceof HeaderItem && (this == obj || this.title.equals(((HeaderItem) obj).title));
     }
 }
