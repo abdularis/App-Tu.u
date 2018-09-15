@@ -41,15 +41,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         initNavDrawer();
-        showHome();
     }
 
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
-        } else if (mCurrentMenuId != R.id.item_home) {
-            onNavigationItemSelected(mNavView.getMenu().findItem(R.id.item_home));
+        } else if (mCurrentMenuId != R.id.item_videos) {
+            onNavigationItemSelected(mNavView.getMenu().findItem(R.id.item_videos));
         } else {
             super.onBackPressed();
         }
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
                 R.string.open_drawer, R.string.close_drawer);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
-        onNavigationItemSelected(mNavView.getMenu().getItem(0));
+        onNavigationItemSelected(mNavView.getMenu().findItem(R.id.item_videos));
     }
 
     private boolean onNavigationItemSelected(MenuItem menuItem) {
