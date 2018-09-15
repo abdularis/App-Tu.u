@@ -101,7 +101,6 @@ public class VideoItem {
                 mCategoryId == o.mCategoryId &&
                 mUri.equals(o.mUri) &&
                 mWord.equals(o.mWord) &&
-                mStarred == o.mStarred &&
-                mStarredDate == o.mStarredDate;
+                mStarred == o.mStarred;
     }
 }
