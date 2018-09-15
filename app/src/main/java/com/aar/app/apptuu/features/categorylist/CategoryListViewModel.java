@@ -16,6 +16,7 @@ import com.aar.app.apptuu.model.VideoItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.BiFunction;
@@ -29,6 +30,8 @@ public class CategoryListViewModel extends AndroidViewModel {
     private VideoItemDao mVideoItemDao;
 
     private MutableLiveData<List<Object>> mOnDataListLoaded;
+    private HeaderItem mStarredHeader;
+    private HeaderItem mCategoryHeader;
 
     public CategoryListViewModel(@NonNull Application application) {
         super(application);
@@ -36,6 +39,8 @@ public class CategoryListViewModel extends AndroidViewModel {
         mCategoryInfoDao = appDatabase.getCategoryInfoDao();
         mVideoItemDao = appDatabase.getVideoItemDao();
         mOnDataListLoaded = new MutableLiveData<>();
+        mStarredHeader = new HeaderItem("Video Berbintang");
+        mCategoryHeader = new HeaderItem("Kategori");
     }
 
     @SuppressLint("CheckResult")
@@ -54,6 +59,21 @@ public class CategoryListViewModel extends AndroidViewModel {
                 .subscribe(mOnDataListLoaded::setValue);
     }
 
+    public void toggleStar(VideoItem model) {
+        Completable completable;
+        if (model.isStarred()) {
+            completable = Completable.fromAction(() -> mVideoItemDao.unstarVideoItem(model.getId()));
+        } else {
+            completable = Completable.fromAction(() -> mVideoItemDao.starVideoItem(model.getId()));
+        }
+
+        completable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(this::loadData)
+                .subscribe();
+    }
+
     private Flowable<List<Object>> getStarredVideoItemFlowable() {
         return mVideoItemDao.getStarredVideoItemList()
                 .flatMap(videoItems -> {
@@ -61,7 +81,7 @@ public class CategoryListViewModel extends AndroidViewModel {
                         return Flowable.just(new ArrayList<>());
                     return Flowable.fromIterable(videoItems)
                             .map((Function<VideoItem, Object>) videoItem -> videoItem)
-                            .startWith(new HeaderItem("Video Berbintang"))
+                            .startWith(mStarredHeader)
                             .toList()
                             .toFlowable();
                 });
@@ -80,7 +100,7 @@ public class CategoryListViewModel extends AndroidViewModel {
                                 return categoryInfo;
                             })
                             .map((Function<CategoryInfo, Object>) categoryInfo -> categoryInfo)
-                            .startWith(new HeaderItem("Kategori"))
+                            .startWith(mCategoryHeader)
                             .toList()
                             .toFlowable();
                 });

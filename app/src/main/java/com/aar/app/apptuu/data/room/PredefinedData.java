@@ -41,8 +41,12 @@ public final class PredefinedData {
                 new VideoItem(ID_ABJ, vidUrl(pkg, R.raw.abjad_intro), "Intro"),
                 new VideoItem(ID_ABJ, vidUrl(pkg, R.raw.abjad_a), "A"),
                 new VideoItem(ID_ABJ, vidUrl(pkg, R.raw.abjad_b), "B"),
-                new VideoItem(ID_ABJ, vidUrl(pkg, R.raw.abjad_c), "C")
+                new VideoItem(ID_ABJ, vidUrl(pkg, R.raw.abjad_c), "C"),
+
+                // angka
+
         };
+
     }
 
     private static String vidUrl(String pkg, int rawRes) {

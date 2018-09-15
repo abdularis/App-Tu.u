@@ -67,6 +67,8 @@ public class CategoryListFragment extends Fragment {
                     } else {
                         star.setImageResource(R.drawable.ic_star_border);
                     }
+
+                    star.setOnClickListener(v -> mViewModel.toggleStar(model));
                 },
                 (model, view) -> {
                     Intent i = new Intent(getActivity(), VideoPlayerActivity.class);

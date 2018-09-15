@@ -3,6 +3,7 @@ package com.aar.app.apptuu.features;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.aar.app.apptuu.R;
+import com.aar.app.apptuu.features.article.ArticleFragment;
 import com.aar.app.apptuu.features.categorylist.CategoryListFragment;
 import com.aar.app.apptuu.features.searchbyvoice.VoiceSearchFragment;
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private int mCurrentMenuId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (mCurrentMenuId != R.id.item_home) {
+            onNavigationItemSelected(mNavView.getMenu().findItem(R.id.item_home));
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
@@ -50,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
                 R.string.open_drawer, R.string.close_drawer);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+        onNavigationItemSelected(mNavView.getMenu().getItem(0));
     }
 
     private boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -76,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showHome() {
+        mCurrentMenuId = R.id.item_home;
         mToolbar.setTitle(R.string.app_name);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -84,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showVideos() {
+        mCurrentMenuId = R.id.item_videos;
         mToolbar.setTitle("Video Latihan");
         getSupportFragmentManager()
                 .beginTransaction()
@@ -92,7 +108,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showArticles() {
-
+        mCurrentMenuId = R.id.item_articles;
+        mToolbar.setTitle("Artikel");
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, ArticleFragment.newInstance())
+                .commit();
     }
 
     private void showAbout() {
