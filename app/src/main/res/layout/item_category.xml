@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:background="@drawable/bg_item_basic">
@@ -11,14 +10,14 @@
         android:id="@+id/frameLayout"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:background="#b4b4b4"
+        android:background="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:tint="@android:color/white"
             app:srcCompat="@drawable/ic_category"/>
