@@ -1,6 +1,8 @@
 package com.aar.app.apptuu.features.categorylist;
 
+import android.app.SearchManager;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,7 +11,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -55,6 +61,7 @@ public class CategoryListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         mAdapter = new MultiTypeAdapter();
         mAdapter.addDelegate(
                 VideoItem.class,
@@ -101,6 +108,7 @@ public class CategoryListFragment extends Fragment {
 
         mViewModel = ViewModelProviders.of(this).get(CategoryListViewModel.class);
         mViewModel.getOnDataListLoaded().observe(this, mAdapter::setItems);
+        mViewModel.getOnVideoItemsFiltered().observe(this, mAdapter::setItems);
     }
 
     @Override
@@ -109,4 +117,39 @@ public class CategoryListFragment extends Fragment {
         mViewModel.loadData();
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.options_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+        SearchManager searchManager =
+                (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) { return false; }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mViewModel.search(newText);
+                return true;
+            }
+        });
+
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                mViewModel.setMode(CategoryListViewModel.Mode.Search);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                mViewModel.setMode(CategoryListViewModel.Mode.Normal);
+                mViewModel.loadData();
+                return true;
+            }
+        });
+    }
 }

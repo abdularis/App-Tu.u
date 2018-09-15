@@ -29,22 +29,33 @@ public class CategoryListViewModel extends AndroidViewModel {
     private CategoryInfoDao mCategoryInfoDao;
     private VideoItemDao mVideoItemDao;
 
+    private MutableLiveData<List<VideoItem>> mOnVideoItemsFiltered;
     private MutableLiveData<List<Object>> mOnDataListLoaded;
     private HeaderItem mStarredHeader;
     private HeaderItem mCategoryHeader;
+    private Mode mCurrentMode;
+    private String mCurrectQuery;
+
+    public enum Mode {
+        Search, Normal
+    }
 
     public CategoryListViewModel(@NonNull Application application) {
         super(application);
         AppDatabase appDatabase = AppDatabase.getInstance(application);
         mCategoryInfoDao = appDatabase.getCategoryInfoDao();
         mVideoItemDao = appDatabase.getVideoItemDao();
+        mOnVideoItemsFiltered = new MutableLiveData<>();
         mOnDataListLoaded = new MutableLiveData<>();
         mStarredHeader = new HeaderItem("Video Berbintang");
         mCategoryHeader = new HeaderItem("Kategori");
+        mCurrentMode = Mode.Normal;
+        mCurrectQuery = "";
     }
 
     @SuppressLint("CheckResult")
     public void loadData() {
+        if (mCurrentMode != Mode.Normal) return;
         Flowable.zip(
                 getStarredVideoItemFlowable(),
                 getCategoryInfoListFlowable(),
@@ -59,6 +70,16 @@ public class CategoryListViewModel extends AndroidViewModel {
                 .subscribe(mOnDataListLoaded::setValue);
     }
 
+    @SuppressLint("CheckResult")
+    public void search(String query) {
+        if (mCurrentMode != Mode.Search) return;
+        mCurrectQuery = query;
+        mVideoItemDao.searchVideoItems(mCurrectQuery + "%")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mOnVideoItemsFiltered::setValue);
+    }
+
     public void toggleStar(VideoItem model) {
         Completable completable;
         if (model.isStarred()) {
@@ -70,7 +91,13 @@ public class CategoryListViewModel extends AndroidViewModel {
         completable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete(this::loadData)
+                .doOnComplete(() -> {
+                    if (mCurrentMode == Mode.Normal) {
+                        loadData();
+                    } else if (mCurrentMode == Mode.Search) {
+                        search(mCurrectQuery);
+                    }
+                })
                 .subscribe();
     }
 
@@ -106,7 +133,15 @@ public class CategoryListViewModel extends AndroidViewModel {
                 });
     }
 
+    public void setMode(Mode mode) {
+        mCurrentMode = mode;
+    }
+
     public LiveData<List<Object>> getOnDataListLoaded() {
         return mOnDataListLoaded;
+    }
+
+    public LiveData<List<VideoItem>> getOnVideoItemsFiltered() {
+        return mOnVideoItemsFiltered;
     }
 }

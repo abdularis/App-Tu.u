@@ -9,12 +9,16 @@ import com.aar.app.apptuu.model.VideoItem;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 @Dao
 public interface VideoItemDao {
 
     @Query("SELECT * FROM video_items")
     Flowable<List<VideoItem>> getVideoItemList();
+
+    @Query("SELECT * FROM video_items WHERE word LIKE :query")
+    Single<List<VideoItem>> searchVideoItems(String query);
 
     @Query("SELECT * FROM video_items WHERE category_id=:categoryId")
     Flowable<List<VideoItem>> getVideoItemList(int categoryId);
