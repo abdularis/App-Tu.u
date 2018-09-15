@@ -1,14 +1,12 @@
 package com.aar.app.apptuu.features.searchbyvoice;
 
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,7 +23,7 @@ import com.aar.app.apptuu.features.videolist.VideoPlayerActivity;
 import com.aar.app.apptuu.model.VideoItem;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -126,7 +124,7 @@ public class VoiceSearchFragment extends Fragment {
         if (requestCode == 123 && resultCode == Activity.RESULT_OK && data != null) {
             ArrayList<String> res = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             mTvResult.setText(res.get(0));
-            mViewModel.search(res);
+            mViewModel.search(new ArrayList<>(Arrays.asList(res.get(0).split(" "))));
         }
     }
 }
