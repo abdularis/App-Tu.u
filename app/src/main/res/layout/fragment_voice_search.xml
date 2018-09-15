@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".features.searchbyvoice.VoiceSearchFragment">
 
 
@@ -12,7 +13,7 @@
         android:id="@+id/btnListen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -28,11 +29,11 @@
             android:id="@+id/imageView2"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginLeft="18dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginLeft="18dp"
             android:layout_marginTop="16dp"
-            android:tint="@android:color/white"
-            android:src="@drawable/ic_mic"/>
+            android:src="@drawable/ic_mic"
+            android:tint="@android:color/white"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -53,7 +54,7 @@
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="120dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnListen"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +69,7 @@
             android:text="Tekan Bicara \nuntuk memulai berbicara."
             android:textAlignment="center"
             android:textColor="#313131"
-            android:textSize="18sp"
+            android:textSize="22sp"
             />
     </ScrollView>
 
@@ -79,9 +80,31 @@
         app:layout_constraintTop_toBottomOf="@id/scrollView"/>
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/headerSeparator"
         app:layout_constraintBottom_toTopOf="@id/scrollView"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvResult"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/textEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tidak ada hasil pencarian."
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

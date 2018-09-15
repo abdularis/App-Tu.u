@@ -20,6 +20,9 @@ public interface VideoItemDao {
     @Query("SELECT * FROM video_items WHERE word LIKE :query")
     Single<List<VideoItem>> searchVideoItems(String query);
 
+    @Query("SELECT * FROM video_items WHERE word LIKE :query")
+    List<VideoItem> searchVideoItemsSync(String query);
+
     @Query("SELECT * FROM video_items WHERE category_id=:categoryId")
     Flowable<List<VideoItem>> getVideoItemList(int categoryId);
 
